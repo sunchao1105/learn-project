@@ -2,14 +2,16 @@
   <div class="body">
     <div class="login">
       <h4>用户登录</h4>
-      <Form>
-        <FormItem>
-          <Input prefix="md-contact" v-model="operForm.username" placeholder="请输入账号" style="width: 250px;height:45px" />
+      <Form ref="loginForm" :model="operForm" :rules="loginRules" inline>
+        <FormItem prop="username">
+          <Input prefix="md-contact" type="text" v-model="operForm.username" :placeholder="请输入账号" style="width: 250px;height:45px" />
         </FormItem>
-        <FormItem>
+        <FormItem prop="password">
           <Input prefix="md-key" type="password" v-model="operForm.password" placeholder="请输入密码" style="width: 250px;height:45px" />
         </FormItem>
-        <Button type="primary" style="width: 250px;height:35px">登录</Button>
+        <FormItem>
+            <Button type="primary"  @click="handleLogin()" style="width: 250px;height:35px">登录</Button>
+        </FormItem>
       </Form>
     </div>
   </div>
@@ -23,7 +25,27 @@ export default {
       operForm: {
         username: '',
         password: ''
+      },
+      loginRules: {
+        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       }
+    }
+  },
+  methods: {
+    handleLogin () {
+      this.$refs['loginForm'].validate((valid) => {
+        if (valid) {
+          // 做登录校验,暂时校验admin/111111,后续去查询后台接口校验
+          if (this.operForm.username === 'admin' && this.operForm.password === '111111') {
+            // 路由跳转,跳转到首页
+            this.$router.push({ path: '/home' })
+          } else {
+            // 密码或者用户名错误
+            this.$Message.error('用户名或者密码有误')
+          }
+        }
+      })
     }
   }
 }
@@ -40,6 +62,7 @@ export default {
     width: 400px;
     padding-top: 30px;
     padding-bottom: 30px;
+    border-radius: 10px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
