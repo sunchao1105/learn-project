@@ -4,7 +4,7 @@
       <h4>用户登录</h4>
       <Form ref="loginForm" :model="operForm" :rules="loginRules" inline>
         <FormItem prop="username">
-          <Input prefix="md-contact" type="text" v-model="operForm.username" :placeholder="请输入账号" style="width: 250px;height:45px" />
+          <Input prefix="md-contact" type="text" v-model="operForm.username" placeholder="请输入账号" style="width: 250px;height:45px" />
         </FormItem>
         <FormItem prop="password">
           <Input prefix="md-key" type="password" v-model="operForm.password" placeholder="请输入密码" style="width: 250px;height:45px" />
@@ -37,9 +37,9 @@ export default {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
           // 做登录校验,暂时校验admin/111111,后续去查询后台接口校验
-          if (this.operForm.username === 'admin' && this.operForm.password === '111111') {
+          if (this.$store.dispatch('login', this.operForm)) {
             // 路由跳转,跳转到首页
-            this.$router.push({ path: '/home' })
+            this.$router.push({ path: '/businPage/home' })
           } else {
             // 密码或者用户名错误
             this.$Message.error('用户名或者密码有误')
