@@ -39,6 +39,7 @@ const webpackBaseConf = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       '@views': resolve('src/views'),
+      '@assets': resolve('src/assets')
     }
   },
   module: {

@@ -1,5 +1,6 @@
-import home from './home.vue'
 import Longin from '@/components/Longin'
+import framePage from './framePage.vue'
+import home from './home.vue'
 
 const businRouter = [
   {
@@ -8,9 +9,16 @@ const businRouter = [
     component: Longin
   },
   {
-    path: '/businPage/home',
-    name: 'home',
-    component: home
+    path: '/businPage/framePage',
+    name: 'framePage',
+    component: framePage,
+    children: [
+      {
+        path: '/businPage/home',
+        name: 'home',
+        component: home
+      }
+    ]
   }
 ]
 
