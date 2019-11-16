@@ -1,3 +1,4 @@
-#node_modules不加入版本控制
+﻿#node_modules不加入版本控制
 
 /node_modules/
+/dist/

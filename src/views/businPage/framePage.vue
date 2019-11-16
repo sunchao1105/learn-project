@@ -60,7 +60,6 @@ export default {
   name: 'home',
   methods: {
     handleMenuEvent (name) {
-      debugger
       if (name === 'logout') {
         if (this.$store.dispatch('logout')) {
           this.$router.push({ path: '/login' })
